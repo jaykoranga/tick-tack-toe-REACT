@@ -1,10 +1,12 @@
-{
+{  "homepage": "https://jaykoranga.github.io/tick-tack-toe-REACT/",
   "name": "react-essentials-deep-dive-adv",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predeploy" :"npm run dev",
+    "deploy":"gh-pages -d build",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
