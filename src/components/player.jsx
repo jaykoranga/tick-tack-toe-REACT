@@ -1,10 +1,13 @@
 import { useState } from "react"
-export default function Player({name,symbol,turn}){
+export default function Player({name,symbol,turn,onPlayer}){
     
     const [inputName,setInputName]=useState(name)
     function handleinput(event){
         
         setInputName(event.target.value)
+        if(isediting){
+            onPlayer(symbol,inputName)
+        }
         
     }
     const [isediting,setediting]=useState(0)

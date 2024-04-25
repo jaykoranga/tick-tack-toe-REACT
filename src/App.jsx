@@ -15,6 +15,20 @@ const initialGameBoard=[
 function App() {
 const [activePlayer,setPlayer]=useState("X")
 const [gameTurns,setGameTurns]=useState([])
+const [players,setPlayers]=useState({
+  'X':"aditi",
+  'O': "jay"
+})
+function handlePlayerDisplay(symbol,newName){
+  setPlayers((prev)=>{
+         if(symbol==='X'){
+          return ({'X':newName,'O':prev['O']})
+         }
+         else{
+          return ({'O':newName,'X':prev['X']})
+         }
+  })
+}
 let hasDraw=false;
 let finalGameBoard = initialGameBoard.map(row => [...row]);
 for (const i of gameTurns) {
@@ -29,7 +43,7 @@ for (const combination of WINNING_COMBINATIONS) {
   const thirdSquareSymbol=finalGameBoard[combination[2].row][combination[2].column];
   if( firstSquareSymbol!=null && firstSquareSymbol===secondSquareSymbol){
     if(secondSquareSymbol===thirdSquareSymbol){
-        winner=firstSquareSymbol
+        winner=players[firstSquareSymbol]
     }
   }
   
@@ -56,8 +70,8 @@ function handleActivePlayer(rowIndex,colIndex){
     <main>
       <div id="game-container">
         <ol id="players" className="highlight-player">
-        <Player turn={activePlayer} symbol="X" name="aditi"></Player>
-         <Player turn={activePlayer} symbol="O" name="jay"></Player>
+        <Player turn={activePlayer} onPlayer={handlePlayerDisplay} symbol="X" name="aditi"></Player>
+         <Player turn={activePlayer} onPlayer={handlePlayerDisplay} symbol="O" name="jay"></Player>
           
          
         </ol>
